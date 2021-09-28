@@ -1,0 +1,6 @@
+openid_connect_discovery.openid_configuration:
+  path: '/.well-known/openid-configuration'
+  defaults:
+    _controller: '\Drupal\openid_connect_discovery\Controller\OpenidConnectDiscoveryController::configuration'
+  requirements:
+    _access: 'TRUE'

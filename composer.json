@@ -1,0 +1,13 @@
+{
+    "name": "drupal/openid_connect_discovery",
+    "description": "OpenID Connect discovery mechanism.",
+    "type": "drupal-module",
+    "license": "GPL-2-or-later",
+    "authors": [
+        {
+            "name": "sanduhrs",
+            "email": "stefan@auditor.email"
+        }
+    ],
+    "require": {}
+}
