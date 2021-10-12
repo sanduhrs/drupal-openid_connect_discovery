@@ -22,15 +22,15 @@ class OpenidConnectDiscoveryController extends ControllerBase {
   public function configuration(): JsonResponse {
     $data = [
       'issuer' => rtrim((new Url('<front>'))->setAbsolute()->toString(), '/'),
-      'authorization_endpoint' => rtrim((new Url('oauth2_token.authorize'))->setAbsolute()->toString()),
-      'token_endpoint' => rtrim((new Url('oauth2_token.token'))->setAbsolute()->toString()),
-      'userinfo_endpoint' => rtrim((new Url('simple_oauth.userinfo'))->setAbsolute()->toString()),
-      'jwks_uri' => rtrim((new Url('simple_oauth.jwks'))->setAbsolute()->toString()),
+      'authorization_endpoint' => rtrim((new Url('oauth2_server.authorize'))->setAbsolute()->toString()),
+      'token_endpoint' => rtrim((new Url('oauth2_server.token'))->setAbsolute()->toString()),
+      'userinfo_endpoint' => rtrim((new Url('oauth2_server.userinfo'))->setAbsolute()->toString()),
+      'jwks_uri' => rtrim((new Url('oauth2_server.jwk'))->setAbsolute()->toString()),
       'end_session_endpoint' => rtrim((new Url('user.logout'))->setAbsolute()->toString()),
       'response_types_supported' => ['code', 'id_token'],
       'subject_types_supported' => ['pairwise', 'public'],
       'id_token_signing_alg_values_supported' => ['RS256'],
-      'scopes_supported' => ['openid', 'profile', 'email'],
+      'scopes_supported' => ['openid', 'profile', 'email', 'offline_access'],
     ];
 
     if (\Drupal::moduleHandler()->moduleExists('openid_connect_dynamic_registration')) {
