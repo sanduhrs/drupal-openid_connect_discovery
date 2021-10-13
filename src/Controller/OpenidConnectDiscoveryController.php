@@ -4,6 +4,7 @@ namespace Drupal\openid_connect_discovery\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
+use Drupal\oauth2_server\Entity\Scope;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -20,6 +21,11 @@ class OpenidConnectDiscoveryController extends ControllerBase {
    *   A json response object.
    */
   public function configuration(): JsonResponse {
+    $scopes = Scope::loadMultiple();
+    foreach ($scopes as $scope) {
+      $scopes_supported[] = $scope->label();
+    }
+
     $data = [
       'issuer' => rtrim((new Url('<front>'))->setAbsolute()->toString(), '/'),
       'authorization_endpoint' => rtrim((new Url('oauth2_server.authorize'))->setAbsolute()->toString()),
@@ -30,7 +36,8 @@ class OpenidConnectDiscoveryController extends ControllerBase {
       'response_types_supported' => ['code', 'id_token'],
       'subject_types_supported' => ['pairwise', 'public'],
       'id_token_signing_alg_values_supported' => ['RS256'],
-      'scopes_supported' => ['openid', 'profile', 'email', 'offline_access'],
+      'scopes_supported' => $scopes_supported,
+      'token_endpoint_auth_methods_supported' => ['client_secret_basic', 'client_secret_post'],
     ];
 
     if (\Drupal::moduleHandler()->moduleExists('openid_connect_dynamic_registration')) {
