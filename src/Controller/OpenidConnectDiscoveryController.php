@@ -32,6 +32,7 @@ class OpenidConnectDiscoveryController extends ControllerBase {
       'id_token_signing_alg_values_supported' => ['RS256'],
       'scopes_supported' => ['openid', 'profile', 'email', 'offline_access'],
       'token_endpoint_auth_methods_supported' => ['client_secret_post', 'client_secret_basic'],
+      'grant_types_supported' => ['refresh_token'],
     ];
 
     if (\Drupal::moduleHandler()->moduleExists('openid_connect_dynamic_registration')) {
