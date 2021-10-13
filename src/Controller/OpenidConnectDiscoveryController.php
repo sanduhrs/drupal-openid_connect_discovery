@@ -27,7 +27,7 @@ class OpenidConnectDiscoveryController extends ControllerBase {
     }
 
     $data = [
-      'issuer' => rtrim((new Url('<front>'))->setAbsolute()->toString(), '/'),
+      'issuer' => (new Url('<front>'))->setAbsolute()->toString(),
       'authorization_endpoint' => rtrim((new Url('oauth2_server.authorize'))->setAbsolute()->toString()),
       'token_endpoint' => rtrim((new Url('oauth2_server.token'))->setAbsolute()->toString()),
       'userinfo_endpoint' => rtrim((new Url('oauth2_server.userinfo'))->setAbsolute()->toString()),
@@ -38,6 +38,7 @@ class OpenidConnectDiscoveryController extends ControllerBase {
       'id_token_signing_alg_values_supported' => ['RS256'],
       'scopes_supported' => $scopes_supported,
       'token_endpoint_auth_methods_supported' => ['client_secret_basic', 'client_secret_post'],
+      'grant_types_supported' => ['refresh_token'],
     ];
 
     if (\Drupal::moduleHandler()->moduleExists('openid_connect_dynamic_registration')) {
