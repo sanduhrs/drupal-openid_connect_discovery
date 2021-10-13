@@ -21,7 +21,7 @@ class OpenidConnectDiscoveryController extends ControllerBase {
    */
   public function configuration(): JsonResponse {
     $data = [
-      'issuer' => rtrim((new Url('<front>'))->setAbsolute()->toString(), '/'),
+      'issuer' => (new Url('<front>'))->setAbsolute()->toString(),
       'authorization_endpoint' => rtrim((new Url('oauth2_server.authorize'))->setAbsolute()->toString()),
       'token_endpoint' => rtrim((new Url('oauth2_server.token'))->setAbsolute()->toString()),
       'userinfo_endpoint' => rtrim((new Url('oauth2_server.userinfo'))->setAbsolute()->toString()),
