@@ -5,6 +5,7 @@ namespace Drupal\openid_connect_discovery\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\oauth2_server\Entity\Scope;
+use Drupal\oauth2_server\Utility;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -38,7 +39,7 @@ class OpenidConnectDiscoveryController extends ControllerBase {
       'id_token_signing_alg_values_supported' => ['RS256'],
       'scopes_supported' => $scopes_supported,
       'token_endpoint_auth_methods_supported' => ['client_secret_basic', 'client_secret_post'],
-      'grant_types_supported' => ['refresh_token'],
+      'grant_types_supported' => array_keys(Utility::getGrantTypes()),
     ];
 
     if (\Drupal::moduleHandler()->moduleExists('openid_connect_dynamic_registration')) {
