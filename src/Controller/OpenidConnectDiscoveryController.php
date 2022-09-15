@@ -21,12 +21,12 @@ class OpenidConnectDiscoveryController extends ControllerBase {
    */
   public function configuration(): JsonResponse {
     $data = [
-      'issuer' => rtrim((new Url('<front>'))->setAbsolute()->toString(), '/'),
-      'authorization_endpoint' => rtrim((new Url('oauth2_token.authorize'))->setAbsolute()->toString()),
-      'token_endpoint' => rtrim((new Url('oauth2_token.token'))->setAbsolute()->toString()),
-      'userinfo_endpoint' => rtrim((new Url('simple_oauth.userinfo'))->setAbsolute()->toString()),
-      'jwks_uri' => rtrim((new Url('simple_oauth.jwks'))->setAbsolute()->toString()),
-      'end_session_endpoint' => rtrim((new Url('user.logout'))->setAbsolute()->toString()),
+      'issuer' => Url::fromUri('internal:')->setAbsolute()->toString(),
+      'authorization_endpoint' => Url::fromRoute('oauth2_token.authorize')->setAbsolute()->toString(),
+      'token_endpoint' => Url::fromRoute('oauth2_token.token')->setAbsolute()->toString(),
+      'userinfo_endpoint' => Url::fromRoute('simple_oauth.userinfo')->setAbsolute()->toString(),
+      'jwks_uri' => Url::fromRoute('simple_oauth.jwks')->setAbsolute()->toString(),
+      'end_session_endpoint' => Url::fromRoute('user.logout')->setAbsolute()->toString(),
       'response_types_supported' => ['code', 'id_token'],
       'subject_types_supported' => ['pairwise', 'public'],
       'id_token_signing_alg_values_supported' => ['RS256'],
