@@ -21,7 +21,7 @@ class OpenidConnectDiscoveryController extends ControllerBase {
    */
   public function configuration(): JsonResponse {
     $data = [
-      'issuer' => Url::fromUri('internal:')->setAbsolute()->toString(),
+      'issuer' => Url::fromUri('internal:/')->setAbsolute()->toString(),
       'authorization_endpoint' => Url::fromRoute('oauth2_token.authorize')->setAbsolute()->toString(),
       'token_endpoint' => Url::fromRoute('oauth2_token.token')->setAbsolute()->toString(),
       'userinfo_endpoint' => Url::fromRoute('simple_oauth.userinfo')->setAbsolute()->toString(),
